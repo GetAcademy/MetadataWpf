@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Navn" HorizontalAlignment="Left" Margin="115,78,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtName" HorizontalAlignment="Left" Height="23" Margin="245,82,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Label Content="E-post" HorizontalAlignment="Left" Margin="115,109,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TxtEmail" HorizontalAlignment="Left" Height="23" Margin="245,120,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
