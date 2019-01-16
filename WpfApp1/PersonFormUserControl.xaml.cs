@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace WpfApp1
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PersonFormUserControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PersonFormUserControl : UserControl
     {
-        public MainWindow()
+        public PersonFormUserControl()
         {
             InitializeComponent();
-            
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }
