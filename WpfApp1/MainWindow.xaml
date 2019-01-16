@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <local:PersonFormUserControl2 HorizontalAlignment="Left" Margin="470,74,0,0" VerticalAlignment="Top" />
+<Grid.ColumnDefinitions>
+    <ColumnDefinition></ColumnDefinition>
+    <ColumnDefinition></ColumnDefinition>
+    <ColumnDefinition></ColumnDefinition>
+</Grid.ColumnDefinitions>
+<Grid.RowDefinitions>
+    <RowDefinition></RowDefinition>
+    <RowDefinition></RowDefinition>
+    <RowDefinition></RowDefinition>
+</Grid.RowDefinitions>
     </Grid>
 </Window>

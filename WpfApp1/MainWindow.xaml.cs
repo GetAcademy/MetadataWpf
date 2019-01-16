@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Model;
 
 namespace WpfApp1
 {
@@ -23,7 +24,24 @@ namespace WpfApp1
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            var metadata = new Metadata()
+            {
+
+                EntityType = typeof(Person),
+                DisplayNameFromPropertyName =
+                {
+                    {"Name", "Navn"},
+                    {"Email", "E-post"},
+                    {"City", "By"},
+                },
+                Operations = new[] {"Lagre", "Avbryt"}
+            };
+            var form = new SuperFormUserControl<Person>(metadata);
+
+            var grid = (Grid) Content;
+            grid.Children.Add()
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
