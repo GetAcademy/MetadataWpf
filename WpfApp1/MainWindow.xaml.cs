@@ -27,20 +27,20 @@ namespace WpfApp1
 
             var metadata = new Metadata()
             {
-
                 EntityType = typeof(Person),
-                DisplayNameFromPropertyName =
+                DisplayNameFromPropertyName = new Dictionary<string, string>
                 {
                     {"Name", "Navn"},
                     {"Email", "E-post"},
                     {"City", "By"},
                 },
-                Operations = new[] {"Lagre", "Avbryt"}
+                Operations = new[] { "Lagre", "Avbryt" }
             };
             var form = new SuperFormUserControl<Person>(metadata);
-
-            var grid = (Grid) Content;
-            grid.Children.Add()
+            var grid = (Grid)Content;
+            grid.Children.Add(form);
+            Grid.SetColumn(form, 0);
+            Grid.SetRow(form, 0);
 
         }
 
