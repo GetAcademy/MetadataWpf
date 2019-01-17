@@ -11,5 +11,10 @@ namespace WpfApp1.Model
         public string Name { get; set; }
         public string Email { get; set; }
         public string City { get; set; }
+
+        public override string ToString()
+        {
+            return Name + " " + Email + " " + City;
+        }
     }
 }

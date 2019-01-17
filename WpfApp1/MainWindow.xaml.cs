@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Model;
+using WpfApp1.Operations;
 
 namespace WpfApp1
 {
@@ -25,23 +26,33 @@ namespace WpfApp1
         {
             InitializeComponent();
 
-            var metadata = new Metadata()
+            var emitEventOperation = new EmitEventOperation<Person> {Name = "Lagre"};
+            var metadata = new Metadata<Person>()
             {
-                EntityType = typeof(Person),
                 DisplayNameFromPropertyName = new Dictionary<string, string>
                 {
                     {"Name", "Navn"},
                     {"Email", "E-post"},
                     {"City", "By"},
                 },
-                Operations = new[] { "Lagre", "Avbryt" }
+                Operations = new Operation<Person>[]
+                {
+                    emitEventOperation, 
+                    new ResetSuperFormOperation<Person> {Name = "Avbryt"}, 
+                }
             };
             var form = new SuperFormUserControl<Person>(metadata);
+            emitEventOperation.ActionDone += FormActionDone;
             var grid = (Grid)Content;
             grid.Children.Add(form);
             Grid.SetColumn(form, 0);
             Grid.SetRow(form, 0);
 
+        }
+
+        private void FormActionDone(object sender, SuperFormEventArgs<Person> e)
+        {
+            MessageBox.Show(e.ToString());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

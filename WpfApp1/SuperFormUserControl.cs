@@ -5,20 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp1.Operations;
 
 namespace WpfApp1
 {
     public class SuperFormUserControl<T> : UserControl
         where T : new()
     {
-        protected internal Metadata _metadata;
+        protected internal Metadata<T> _metadata;
         private Dictionary<string, TextBox> _textBoxes;
-        private Dictionary<Button, string> _operations;
+        private Dictionary<Button, Operation<T>> _operations;
 
-        public SuperFormUserControl(Metadata metadata)
+        public SuperFormUserControl(Metadata<T> metadata)
         {
             _textBoxes = new Dictionary<string, TextBox>();
-            _operations = new Dictionary<Button, string>();
+            _operations = new Dictionary<Button, Operation<T>>();
             _metadata = metadata;
             var grid = CreateGrid();
             var row = 0;
@@ -30,9 +31,6 @@ namespace WpfApp1
             CreateButtonPanel(metadata, grid, row);
             Content = grid;
         }
-
-        public event EventHandler<SuperFormEvent<T>> ActionDone;
-
 
         private T GetValues()
         {
@@ -47,7 +45,7 @@ namespace WpfApp1
             return obj;
         }
 
-        private void CreateButtonPanel(Metadata metadata, Grid grid, int row)
+        private void CreateButtonPanel(Metadata<T> metadata, Grid grid, int row)
         {
             var buttonPanel = new StackPanel()
             {
@@ -57,10 +55,11 @@ namespace WpfApp1
             {
                 var button = new Button()
                 {
-                    Content = operation,
+                    Content = operation.Name,
                     Width = 70,
                 };
                 buttonPanel.Children.Add(button);
+                _operations.Add(button, operation);
                 button.Click += ButtonClick;
             }
 
@@ -71,18 +70,10 @@ namespace WpfApp1
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
             var operation = _operations[(Button)sender];
-            var obj = GetValues();
-            if (ActionDone != null)
-            {
-                ActionDone(this, new SuperFormEvent<T>()
-                {
-                    ValueObject = obj,
-                    Operation = operation
-                });
-            }
+            operation.Do(GetValues());
         }
 
-        private void CreateFieldRow(Metadata metadata, string dataPropertyName, Grid grid, int row)
+        private void CreateFieldRow(Metadata<T> metadata, string dataPropertyName, Grid grid, int row)
         {
             var textBox = new TextBox() { Width = 200 };
             _textBoxes.Add(dataPropertyName, textBox);

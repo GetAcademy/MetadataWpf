@@ -57,6 +57,10 @@
     </ApplicationDefinition>
     <Compile Include="Metadata.cs" />
     <Compile Include="Model\Person.cs" />
+    <Compile Include="Operations\EmitEventOperation.cs" />
+    <Compile Include="Operations\Operation.cs" />
+    <Compile Include="Operations\ResetSuperFormOperation.cs" />
+    <Compile Include="SuperFormEventArgs.cs" />
     <Compile Include="SuperFormUserControl.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
